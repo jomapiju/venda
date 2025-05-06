@@ -1,6 +1,7 @@
 package com.javastore.venda.facade;
 
 import com.javastore.venda.model.Venda;
+import com.javastore.venda.sigleton.NumeroVendaSingleton;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +19,11 @@ public class VendaFacade {
     @Autowired
     NotaFacade notaFacade;
 
+    @Autowired
+    private NumeroVendaSingleton numeroVenda;
+
     public boolean ExecutarVenda(Venda venda){
+        System.out.printf("Venda numero: %d%n", numeroVenda.getNumeroVenda());
         if(!estoqueFacade.ReservaEstoque(venda.quantidade, venda.produtoId)){
             return false;
         }
